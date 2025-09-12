@@ -1,0 +1,1 @@
+// Example state management class\nimport 'package:flutter/foundation.dart';\n\nclass AppState extends ChangeNotifier {\n  int counter = 0;\n\n  void increment() {\n    counter++;\n    notifyListeners();\n  }\n}
