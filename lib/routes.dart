@@ -1,0 +1,34 @@
+import 'package:flutter/material.dart';
+import 'screens/login_screen.dart';
+import 'screens/register_screen.dart';
+import 'screens/dashboard_screen.dart';
+import 'screens/student_list_screen.dart';
+import 'screens/camera_attendance_screen.dart';
+import 'screens/reports_screen.dart';
+import 'screens/report_view_daily.dart';
+import 'screens/report_view_weekly.dart';
+import 'screens/report_view_monthly.dart';
+
+class Routes {
+  static const String login = '/';
+  static const String register = '/register';
+  static const String dashboard = '/dashboard';
+  static const String students = '/students';
+  static const String camera = '/camera';
+  static const String reports = '/reports';
+  static const String daily = '/report/daily';
+  static const String weekly = '/report/weekly';
+  static const String monthly = '/report/monthly';
+
+  static Map<String, WidgetBuilder> getRoutes() => {
+        login: (c) => LoginScreen(),
+        register: (c) => RegisterScreen(),
+        dashboard: (c) => DashboardScreen(),
+        students: (c) => StudentListScreen(),
+        camera: (c) => CameraAttendanceScreen(),
+        reports: (c) => ReportsScreen(),
+        daily: (c) => DailyReportView(),
+        weekly: (c) => WeeklyReportView(),
+        monthly: (c) => MonthlyReportView(),
+      };
+}

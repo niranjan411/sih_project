@@ -1,101 +1,99 @@
 import 'package:flutter/material.dart';
-import 'dashboard_screen.dart';
-import 'register_screen.dart';
+import '../widgets/app_header.dart';
+import '../widgets/app_footer.dart';
+import 'package:file_picker/file_picker.dart'; // optional if you use file picker
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  String fullName = '';
+  String password = '';
+  String language = 'English';
+
+  // NOTE: password min length set to 6 to match your requested requirement.
+  // For better security change to >= 8.
+
+  _openLanguagePicker() async {
+    final chosen = await showDialog<String>(
+      context: context,
+      builder: (_) => SimpleDialog(
+        title: Text('Choose language'),
+        children: [
+          SimpleDialogOption(child: Text('English'), onPressed: () => Navigator.pop(context, 'English')),
+          SimpleDialogOption(child: Text('हिन्दी'), onPressed: () => Navigator.pop(context, 'हिन्दी')),
+          SimpleDialogOption(child: Text('मराठी'), onPressed: () => Navigator.pop(context, 'मराठी')),
+        ],
+      ),
+    );
+
+    if (chosen != null) setState(() => language = chosen);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            elevation: 6,
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
+      appBar: AppHeader(
+        title: "Login",
+        leading: IconButton(
+          icon: Icon(Icons.language),
+          onPressed: _openLanguagePicker,
+          tooltip: 'Change Language',
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Text("Language: $language", style: TextStyle(color: Colors.black54)),
+            SizedBox(height: 20),
+            Form(
+              key: _formKey,
+              child: Column(children: [
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Full name'),
+                  validator: (v) => (v==null || v.trim().isEmpty) ? 'Enter full name' : null,
+                  onSaved: (v) => fullName = v!.trim(),
+                ),
+                SizedBox(height: 12),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Password (min 6 chars)'),
+                  obscureText: true,
+                  validator: (v) {
+                    if (v == null || v.isEmpty) return 'Enter password';
+                    if (v.length < 6) return 'Password must be at least 6 chars';
+                    return null;
+                  },
+                  onSaved: (v) => password = v ?? '',
+                ),
+                SizedBox(height: 16),
+                Row(
                   children: [
-                    const Icon(Icons.school, size: 80, color: Colors.blue),
-                    const SizedBox(height: 20),
-                    const Text(
-                      "Student Attendance",
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 30),
-
-                    // Username
-                    TextFormField(
-                      controller: _usernameController,
-                      decoration: const InputDecoration(
-                        labelText: "Username",
-                        border: OutlineInputBorder(),
-                      ),
-                      validator: (value) =>
-                          value == null || value.isEmpty ? "Enter username" : null,
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Password
-                    TextFormField(
-                      controller: _passwordController,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: "Password",
-                        border: OutlineInputBorder(),
-                      ),
-                      validator: (value) =>
-                          value == null || value.length < 6 ? "Min 6 characters" : null,
-                    ),
-                    const SizedBox(height: 20),
-
-                    // Login Button
                     ElevatedButton(
+                      child: Text('Login'),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (_) => const DashboardScreen()),
-                          );
+                          _formKey.currentState!.save();
+                          // Simulate login - in real app call backend
+                          Navigator.pushReplacementNamed(context, '/dashboard');
                         }
                       },
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 50),
-                      ),
-                      child: const Text("Login"),
                     ),
-                    const SizedBox(height: 10),
-
-                    // Go to Registration
+                    SizedBox(width: 12),
                     TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const RegisterScreen()),
-                        );
-                      },
-                      child: const Text("Don’t have an account? Register"),
-                    ),
+                      child: Text('Register first'),
+                      onPressed: () => Navigator.pushNamed(context, '/register'),
+                    )
                   ],
                 ),
-              ),
+              ]),
             ),
-          ),
+            Spacer(),
+            AppFooter(),
+          ],
         ),
       ),
     );
