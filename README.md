@@ -14,3 +14,22 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+# Backend Server
+
+## To Start the Server
+
+1. Navigate to the project folder:
+```bash
+cd server
+```
+2. Run the server:
+  - For automatic reload on changes:
+```bash
+nodemon index.js
+```
+  - Or normally:
+```bash
+node index.js
+```
+The server will run on http://localhost:3000.
