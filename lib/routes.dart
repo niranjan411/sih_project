@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
-import 'screens/register_screen.dart';
+import 'screens/register_school_screen.dart';
+import 'screens/sign_up_screen.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/student_list_screen.dart';
 import 'screens/camera_attendance_screen.dart';
@@ -9,9 +10,11 @@ import 'screens/report_view_daily.dart';
 import 'screens/report_view_weekly.dart';
 import 'screens/report_view_monthly.dart';
 
+
 class Routes {
   static const String login = '/';
   static const String register = '/register';
+  static const String signup = '/signup';
   static const String dashboard = '/dashboard';
   static const String students = '/students';
   static const String camera = '/camera';
@@ -22,7 +25,8 @@ class Routes {
 
   static Map<String, WidgetBuilder> getRoutes() => {
         login: (c) => LoginScreen(),
-        register: (c) => RegisterScreen(),
+        signup : (_) => SignUpScreen(),
+        register: (c) => RegisterSchoolScreen(),
         dashboard: (c) => DashboardScreen(),
         students: (c) => StudentListScreen(),
         camera: (c) => CameraAttendanceScreen(),
@@ -32,3 +36,4 @@ class Routes {
         monthly: (c) => MonthlyReportView(),
       };
 }
+
