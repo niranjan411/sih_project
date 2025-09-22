@@ -1,0 +1,21 @@
+
+C:\Users\OM\Desktop\Niranjan\sih_project\sih_project\server
+├── app.js
+├── config
+├── controllers
+├── index.js
+├── middlewares
+├── models
+├── node_modules
+├── package-lock.json
+├── package.json
+├── routes
+├── services
+├── structure.txt
+└── utils
+
+directory: 8 file: 5
+
+
+
+[2K[1G
