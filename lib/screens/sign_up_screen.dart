@@ -21,6 +21,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _loading = false;
   bool _obscurePassword = true;
   bool _obscureConfirm = true;
+  
+  String? get username => null;
 
   _openLanguagePicker() async {
     final chosen = await showDialog<String>(
@@ -60,9 +62,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         );
         // Navigate to RegisterSchoolScreen after successful signup
         Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => RegisterSchoolScreen()),
-        );
+  context,
+  MaterialPageRoute(builder: (_) => RegisterSchoolScreen(username: _usernameController.text.trim())),
+);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(data['message'] ?? 'Registration failed')),

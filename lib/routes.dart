@@ -9,12 +9,12 @@ import 'screens/reports_screen.dart';
 import 'screens/report_view_daily.dart';
 import 'screens/report_view_weekly.dart';
 import 'screens/report_view_monthly.dart';
-
+import 'screens/school_approve_pending.dart';
 
 class Routes {
   static const String login = '/';
-  static const String register = '/register';
   static const String signup = '/signup';
+  static const String register = '/register';
   static const String dashboard = '/dashboard';
   static const String students = '/students';
   static const String camera = '/camera';
@@ -22,11 +22,12 @@ class Routes {
   static const String daily = '/report/daily';
   static const String weekly = '/report/weekly';
   static const String monthly = '/report/monthly';
+  static const String approvePending = '/approve_pending';
 
-  static Map<String, WidgetBuilder> getRoutes() => {
+  static Map<String, WidgetBuilder> getRoutes({String username = ''}) => {
         login: (c) => LoginScreen(),
-        signup : (_) => SignUpScreen(),
-        register: (c) => RegisterSchoolScreen(),
+        signup: (c) => SignUpScreen(),
+        register: (c) => RegisterSchoolScreen(username: ''), // <-- provide a default or pass actual username
         dashboard: (c) => DashboardScreen(),
         students: (c) => StudentListScreen(),
         camera: (c) => CameraAttendanceScreen(),
@@ -34,6 +35,6 @@ class Routes {
         daily: (c) => DailyReportView(),
         weekly: (c) => WeeklyReportView(),
         monthly: (c) => MonthlyReportView(),
+        approvePending: (c) => SchoolApprovePendingScreen(),
       };
 }
-

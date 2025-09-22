@@ -21,7 +21,7 @@ class UserService {
     // Insert new user (⚡ include full_name)
     const { data, error } = await supabase
       .from(UserModel.table)
-      .insert([{ username, full_name, password: hashedPassword, role: role}])
+      .insert([{ username, full_name, password: hashedPassword, role: role || 'school_admin'}])
       .select()
       .single();
 
