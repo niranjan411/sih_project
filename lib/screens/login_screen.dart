@@ -1,9 +1,11 @@
+import '../utils/api_constants.dart'; 
 import 'package:attendance_app1/screens/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../widgets/app_header.dart';
 import '../widgets/app_footer.dart';
+
 
 
 class LoginScreen extends StatefulWidget {
@@ -34,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _loginUser() async {
-    final url = Uri.parse('http://localhost:3000/api/users/login'); // your backend URL
+    final url = Uri.parse('https://${ApiConstants.baseUrl}/api/users/login'); // your backend URL
     setState(() => _loading = true);
 
     try {

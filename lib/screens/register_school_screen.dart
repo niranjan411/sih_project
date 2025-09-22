@@ -1,7 +1,9 @@
+import '../utils/api_constants.dart'; 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:file_picker/file_picker.dart';
+
 
 import '../widgets/app_header.dart';
 import '../widgets/app_footer.dart';
@@ -45,7 +47,7 @@ class _RegisterSchoolScreenState extends State<RegisterSchoolScreen> {
     if (!_form.currentState!.validate()) return;
     _form.currentState!.save();
 
-    final url = Uri.parse('http://localhost:3000/api/schools/createschool'); // ✅ Your backend endpoint
+    final url = Uri.parse('https://${ApiConstants.baseUrl}/api/schools/createschool'); // ✅ Your backend endpoint
     setState(() => _loading = true);
 
     try {

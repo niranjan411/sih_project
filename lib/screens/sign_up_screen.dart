@@ -1,9 +1,11 @@
+import '../utils/api_constants.dart'; 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../widgets/app_header.dart';
 import '../widgets/app_footer.dart';
 import 'register_school_screen.dart'; // import your school registration screen
+
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -40,7 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Future<void> _registerUser() async {
-    final url = Uri.parse('http://localhost:3000/api/users/signup'); // replace with your backend URL
+    final url = Uri.parse('https://${ApiConstants.baseUrl}/api/users/signup'); // replace with your backend URL
     setState(() => _loading = true);
 
     try {

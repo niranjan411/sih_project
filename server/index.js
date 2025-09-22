@@ -1,5 +1,6 @@
 import app from "./app.js";   // Import the exported app
-import connectDB from "./config/db.js";
+import connectDB from "./config/db.js"; // ✅ named import
+
 import UserModel from "./models/user.model.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -12,7 +13,6 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-console.log(process.env.JWT_SECRET)
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
